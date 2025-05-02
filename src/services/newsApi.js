@@ -57,21 +57,38 @@
 
 // export const { useGetNewsQuery } = newsApi;
 
+// import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
+// export const newsApi = createApi({
+//   reducerPath: 'newsApi',
+//   baseQuery: fetchBaseQuery({
+//     baseUrl: 'https://newsapi.org/v2/',
+//     prepareHeaders: (headers) => {
+//       headers.set('X-Api-Key', '9fd797c55ea4472596c82b006765014a'); // Use your NewsAPI.org key
+//       return headers;
+//     },
+//   }),
+//   endpoints: (builder) => ({
+//     getNews: builder.query({
+//       query: ({ newsCategory = 'crypto', count = 10 }) =>
+//         `everything?q=${encodeURIComponent(newsCategory)}&pageSize=${count}&sortBy=publishedAt&language=en`,
+//     }),
+//   }),
+// });
+
+// export const { useGetNewsQuery } = newsApi;
+
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const newsApi = createApi({
   reducerPath: 'newsApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://newsapi.org/v2/',
-    prepareHeaders: (headers) => {
-      headers.set('X-Api-Key', '9fd797c55ea4472596c82b006765014a'); // Use your NewsAPI.org key
-      return headers;
-    },
+    baseUrl: 'http://localhost:5000', // <-- Use your proxy
   }),
   endpoints: (builder) => ({
     getNews: builder.query({
       query: ({ newsCategory = 'crypto', count = 10 }) =>
-        `everything?q=${encodeURIComponent(newsCategory)}&pageSize=${count}&sortBy=publishedAt&language=en`,
+        `/api/news?q=${encodeURIComponent(newsCategory)}&pageSize=${count}`,
     }),
   }),
 });
